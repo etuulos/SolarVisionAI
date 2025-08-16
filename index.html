@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarVision AI - Next-Gen Solar Intelligence Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="brand-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-solar-panel"></i>
+                </div>
+                <div class="brand-text">
+                    <div class="brand-name">SolarVision AI</div>
+                    <div class="brand-subtitle">Smart Solar Intelligence</div>
+                </div>
+            </div>
+
+            <div class="nav-menu">
+                <a href="#" class="nav-link active" data-page="home">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="nav-link" data-page="analyzer">
+                    <i class="fas fa-satellite"></i>
+                    <span>AI Analyzer</span>
+                </a>
+                <a href="#" class="nav-link" data-page="insights">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Insights</span>
+                </a>
+                <button class="nav-cta" data-action="start-analysis">
+                    <i class="fas fa-rocket"></i>
+                    <span>Start Analysis</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="mainContent">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-background">
+                    <div class="smart-grid"></div>
+                    <div class="floating-particles">
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                    </div>
+                </div>
+
+                <div class="hero-container">
+                    <div class="hero-content">
+                        <div class="hero-badge">
+                            <i class="fas fa-sparkles"></i>
+                            <span>Powered by Advanced AI</span>
+                        </div>
+
+                        <h1 class="hero-title">
+                            Next-Gen <span class="gradient-text">Solar Intelligence</span><br>
+                            Platform
+                        </h1>
+
+                        <p class="hero-description">
+                            Harness the power of advanced algorithms to optimize solar panel placement,
+                            predict energy output, and maximize your renewable energy investment with
+                            unprecedented precision.
+                        </p>
+
+                        <div class="hero-actions">
+                            <button class="btn-primary large" data-action="start-analysis">
+                                <i class="fas fa-rocket"></i>
+                                <span>Start Analysis</span>
+                            </button>
+                        </div>
+
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">99.7%</div>
+                                <div class="stat-text">AI Accuracy</div>
+                            </div>
+                            <div class="stat-divider"></div>
+                            <div class="stat-item">
+                                <div class="stat-number">50K+</div>
+                                <div class="stat-text">Roofs Analyzed</div>
+                            </div>
+                            <div class="stat-divider"></div>
+                            <div class="stat-item">
+                                <div class="stat-number">$2.3M</div>
+                                <div class="stat-text">Savings Generated</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hero-visual">
+                        <div class="radar-animation">
+                            <div class="radar-container">
+                                <div class="radar-center">
+
+                                </div>
+                                <div class="radar-wave wave-1"></div>
+                                <div class="radar-wave wave-2"></div>
+                                <div class="radar-wave wave-3"></div>
+                                <div class="radar-wave wave-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+        </div>
+        </section>
+
+
+        </div>
+
+        <!-- AI Analyzer Page -->
+        <div id="analyzer" class="page analyzer-page">
+            <!-- Search Section -->
+            <section class="search-section">
+                <div class="container">
+                    <div class="search-header">
+                        <h1>AI Solar Analysis</h1>
+                        <p>Enter your address to begin advanced AI-powered solar analysis</p>
+                    </div>
+
+                    <div class="search-container">
+                        <div class="search-box">
+                            <div class="search-input-group">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <input type="text" id="addressInput"
+                                    placeholder="Enter your address for AI analysis...">
+                                <button id="searchBtn" class="search-btn">
+                                    <span>Search</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Solar Zones Section -->
+            <section class="solar-zones-section" style="display: none;" id="solarZonesSection">
+                <div class="container">
+                    <div class="zones-header">
+                        <div class="zones-title">
+                            <h3><i class="fas fa-draw-polygon"></i> Solar Zones Management</h3>
+                            <p>Configure individual solar zones and optimize placement</p>
+                        </div>
+                        <div class="zones-actions">
+                        </div>
+                    </div>
+
+                    <!-- Total Summary - Always Visible -->
+                    <div class="zones-summary-top">
+                        <div class="summary-header">
+                            <h4>Total Summary</h4>
+                            <span class="zones-count" id="zonesCount">0 zones</span>
+                        </div>
+                        <div class="summary-stats-horizontal">
+                            <div class="summary-stat-compact">
+                                <div class="stat-icon">
+                                    <i class="fas fa-solar-panel"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-value" id="totalPanels">0</div>
+                                    <div class="stat-label">Panels</div>
+                                </div>
+                            </div>
+                            <div class="summary-stat-compact">
+                                <div class="stat-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-value" id="totalPower">0 kW</div>
+                                    <div class="stat-label">Power</div>
+                                </div>
+                            </div>
+                            <div class="summary-stat-compact">
+                                <div class="stat-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-value" id="totalOutput">0 kWh</div>
+                                    <div class="stat-label">Annual Output</div>
+                                </div>
+                            </div>
+                            <div class="summary-stat-compact">
+                                <div class="stat-icon">
+                                    <i class="fas fa-euro-sign"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-value" id="totalSavings">0% efficiency</div>
+                                    <div class="stat-label">System Efficiency</div>
+                                </div>
+                            </div>
+                            <div class="summary-stat-compact">
+                                <div class="stat-icon">
+                                    <i class="fas fa-ruler-combined"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-value" id="totalArea">0 m²</div>
+                                    <div class="stat-label">Total Area</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </section>
+
+            <!-- Zone Info Panel -->
+            <div id="zoneInfoPanel" class="zone-info-panel" style="display: none;">
+                <div class="zone-info-content">
+                    <div class="zone-info-header">
+                        <h4><i class="fas fa-solar-panel"></i> <span id="zoneInfoTitle">Solar Zone Details</span></h4>
+                        <button id="zoneInfoClose" class="zone-info-close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="zone-info-stats">
+                        <div class="zone-info-stat">
+                            <span class="stat-label">Area:</span>
+                            <span class="stat-value" id="zoneInfoArea">--</span>
+                        </div>
+                        <div class="zone-info-stat">
+                            <span class="stat-label">Panels:</span>
+                            <span class="stat-value" id="zoneInfoPanels">--</span>
+                        </div>
+                        <div class="zone-info-stat">
+                            <span class="stat-label">Power:</span>
+                            <span class="stat-value" id="zoneInfoPower">--</span>
+                        </div>
+                        <div class="zone-info-stat">
+                            <span class="stat-label">Annual Output:</span>
+                            <span class="stat-value" id="zoneInfoOutput">--</span>
+                        </div>
+                        <div class="zone-info-stat">
+                            <span class="stat-label">Efficiency:</span>
+                            <span class="stat-value" id="zoneInfoSavings">--</span>
+                        </div>
+                        <div class="zone-info-actions">
+                            <button id="zoneInfoEdit" class="zone-info-btn">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button id="zoneInfoDelete" class="zone-info-btn delete">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map and Analysis Section -->
+            <section class="map-analysis-section">
+                <div class="map-analysis-container">
+                    <!-- Map Container -->
+                    <div class="map-container">
+                        <div id="map"></div>
+
+                        <!-- Map Controls -->
+                        <div class="map-controls">
+                            <button id="satelliteView" class="map-control-btn">
+                                <i class="fas fa-satellite"></i>
+                                <span>Satellite</span>
+                            </button>
+                            <button id="streetView" class="map-control-btn active">
+                                <i class="fas fa-map"></i>
+                                <span>Street</span>
+                            </button>
+                        </div>
+
+                        <!-- Zone Drawing Controls -->
+                        <div class="zone-drawing-controls" id="zoneDrawingControls" style="display: none;">
+                            <div class="zone-main-buttons">
+                                <button id="drawZoneBtn" class="zone-control-btn draw-btn">
+                                    <i class="fas fa-plus"></i>
+                                    <span>Draw Zone</span>
+                                </button>
+                                <button id="editZoneBtn" class="zone-control-btn edit-btn" disabled>
+                                    <i class="fas fa-edit"></i>
+                                    <span>Edit Zone</span>
+                                </button>
+                                <button id="deleteZoneBtn" class="zone-control-btn delete-btn" disabled>
+                                    <i class="fas fa-trash"></i>
+                                    <span>Delete Zone</span>
+                                </button>
+                            </div>
+
+                            <!-- Edit Mode Actions (shown when editing) -->
+                            <div class="zone-edit-actions-map" id="zoneEditActionsMap" style="display: none;">
+                                <button class="zone-control-btn save-btn" id="saveZoneBtnMap">
+                                    <i class="fas fa-check"></i>
+                                    <span>Done</span>
+                                </button>
+                                <button class="zone-control-btn cancel-btn" id="cancelZoneBtnMap">
+                                    <i class="fas fa-times"></i>
+                                    <span>Cancel</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Side Analysis Panel -->
+                    <div class="analysis-sidebar" id="analysisSidebar">
+                        <!-- Selected Zone Controls (Top Priority) -->
+                        <div class="selected-zone-controls" id="selectedZoneControls" style="display: none;">
+                            <div class="controls-header">
+                                <h4>Selected Zone: <span id="selectedZoneName">Zone 1</span></h4>
+                            </div>
+                            <div class="zone-panel-controls">
+                                <label>Panel Count for Selected Zone</label>
+                                <div class="slider-container">
+                                    <input type="range" id="zonePanelCount" min="1" max="100" value="25" class="slider">
+                                    <div class="slider-value" id="zonePanelCountValue">25 panels</div>
+                                </div>
+                            </div>
+                            <div class="selected-zone-stats">
+                                <div class="zone-stat">
+                                    <span class="stat-label">Area:</span>
+                                    <span class="stat-value" id="selectedZoneArea">--</span>
+                                </div>
+                                <div class="zone-stat">
+                                    <span class="stat-label">Power:</span>
+                                    <span class="stat-value" id="selectedZonePower">--</span>
+                                </div>
+                                <div class="zone-stat">
+                                    <span class="stat-label">Annual Output:</span>
+                                    <span class="stat-value" id="selectedZoneOutput">--</span>
+                                </div>
+                                <div class="zone-stat">
+                                    <span class="stat-label">Efficiency:</span>
+                                    <span class="stat-value" id="selectedZoneSavings">--</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sunlight Analysis Panel -->
+                        <div class="sunlight-panel" id="sunlightPanel" style="display: none;">
+                            <div class="sunlight-header">
+                                <h4><i class="fas fa-sun"></i> Sunlight Analysis</h4>
+                                <div class="sunlight-controls">
+                                    <select id="sunlightPeriod" class="period-selector">
+                                        <option value="30days">Last 30 Days</option>
+                                        <option value="6months">Last 6 Months</option>
+                                        <option value="12months" selected>Last 12 Months</option>
+                                    </select>
+                                    <span class="data-source" id="sunlightDataSource">Loading...</span>
+                                </div>
+                            </div>
+                            <div class="sunlight-stats">
+                                <div class="sunlight-stat">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-calendar-day"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="stat-value" id="sunlightDaily">--</div>
+                                        <div class="stat-label">Daily Average</div>
+                                    </div>
+                                </div>
+                                <div class="sunlight-stat">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-calendar-week"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="stat-value" id="sunlightWeekly">--</div>
+                                        <div class="stat-label">Weekly Total</div>
+                                    </div>
+                                </div>
+                                <div class="sunlight-stat">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="stat-value" id="sunlightMonthly">--</div>
+                                        <div class="stat-label">Monthly Total</div>
+                                    </div>
+                                </div>
+                                <div class="sunlight-stat">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-calendar"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="stat-value" id="sunlightYearly">--</div>
+                                        <div class="stat-label">Yearly Estimate</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Placeholder when no analysis -->
+                        <div class="analysis-placeholder" id="analysisPlaceholder">
+                            <div class="placeholder-content">
+                                <i class="fas fa-search-location"></i>
+                                <h4>Search for a Location</h4>
+                                <p>Enter an address above to start analyzing solar potential and drawing zones.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Insights Page -->
+        <div id="insights" class="page insights-page">
+            <!-- AI Intelligence Overview -->
+            <section class="ai-overview-section">
+                <div class="container">
+                    <div class="insights-header">
+                        <h1>AI Solar Intelligence Dashboard</h1>
+                        <p>Real-time analytics powered by machine learning and satellite data</p>
+                        <div class="ai-status">
+                            <div class="status-indicator active">
+                                <i class="fas fa-microchip"></i>
+                                <span>Smart Analysis Active</span>
+                            </div>
+                            <div class="status-indicator active">
+                                <i class="fas fa-satellite"></i>
+                                <span>Satellite Data Live</span>
+                            </div>
+                            <div class="status-indicator active">
+                                <i class="fas fa-cloud-sun"></i>
+                                <span>Weather AI Online</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Metrics Dashboard -->
+            <section class="metrics-dashboard">
+                <div class="container">
+                    <div class="metrics-grid">
+                        <div class="metric-card primary">
+                            <div class="metric-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="metric-content">
+                                <div class="metric-value" id="aiAccuracy">99.7%</div>
+                                <div class="metric-label">Analysis Accuracy</div>
+                                <div class="metric-trend positive">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>+2.3% this month</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i class="fas fa-solar-panel"></i>
+                            </div>
+                            <div class="metric-content">
+                                <div class="metric-value" id="systemsAnalyzed">52,847</div>
+                                <div class="metric-label">Systems Analyzed</div>
+                                <div class="metric-trend positive">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>+1,247 today</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i class="fas fa-euro-sign"></i>
+                            </div>
+                            <div class="metric-content">
+                                <div class="metric-value" id="totalSavings">€2.8M</div>
+                                <div class="metric-label">Total Savings Generated</div>
+                                <div class="metric-trend positive">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>+€47K this week</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div class="metric-content">
+                                <div class="metric-value" id="co2Saved">18,420</div>
+                                <div class="metric-label">Tons CO₂ Prevented</div>
+                                <div class="metric-trend positive">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>+127 tons today</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Analytics Grid -->
+            <section class="analytics-section">
+                <div class="container">
+                    <div class="analytics-grid">
+                        <!-- Market Intelligence -->
+                        <div class="insight-card large">
+                            <div class="card-header">
+                                <h3>European Solar Market Intelligence</h3>
+                                <i class="fas fa-chart-line"></i>
+                                <div class="card-status live">
+                                    <i class="fas fa-circle"></i>
+                                    <span>Live Data</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="market-overview">
+                                    <div class="market-stats">
+                                        <div class="market-stat">
+                                            <div class="stat-value">€0.27</div>
+                                            <div class="stat-label">Avg. Electricity Price</div>
+                                            <div class="stat-change positive">+8.2%</div>
+                                        </div>
+                                        <div class="market-stat">
+                                            <div class="stat-value">€1,847</div>
+                                            <div class="stat-label">Avg. System Cost/kW</div>
+                                            <div class="stat-change negative">-12.4%</div>
+                                        </div>
+                                        <div class="market-stat">
+                                            <div class="stat-value">6.8 years</div>
+                                            <div class="stat-label">Avg. Payback Period</div>
+                                            <div class="stat-change negative">-1.2 years</div>
+                                        </div>
+                                    </div>
+                                    <div class="market-trends">
+                                        <h4>Key Market Trends</h4>
+                                        <div class="trend-items">
+                                            <div class="trend-item">
+                                                <i class="fas fa-arrow-up trend-positive"></i>
+                                                <span>Solar installations up 34% in Germany</span>
+                                            </div>
+                                            <div class="trend-item">
+                                                <i class="fas fa-arrow-up trend-positive"></i>
+                                                <span>Feed-in tariffs increased in Netherlands</span>
+                                            </div>
+                                            <div class="trend-item">
+                                                <i class="fas fa-exclamation-triangle trend-warning"></i>
+                                                <span>Supply chain delays affecting panel prices</span>
+                                            </div>
+                                            <div class="trend-item">
+                                                <i class="fas fa-arrow-up trend-positive"></i>
+                                                <span>Battery storage adoption accelerating</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Weather Intelligence -->
+                        <div class="insight-card">
+                            <div class="card-header">
+                                <h3>Weather AI Analytics</h3>
+                                <i class="fas fa-cloud-sun"></i>
+                                <div class="card-status live">
+                                    <i class="fas fa-circle"></i>
+                                    <span>Real-time</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="weather-analytics">
+                                    <div class="weather-summary">
+                                        <div class="weather-metric">
+                                            <div class="weather-icon">
+                                                <i class="fas fa-sun"></i>
+                                            </div>
+                                            <div class="weather-data">
+                                                <div class="weather-value" id="currentSunHours">4.7h</div>
+                                                <div class="weather-label">Today's Sun Hours</div>
+                                            </div>
+                                        </div>
+                                        <div class="weather-metric">
+                                            <div class="weather-icon">
+                                                <i class="fas fa-eye"></i>
+                                            </div>
+                                            <div class="weather-data">
+                                                <div class="weather-value" id="solarIrradiance">847 W/m²</div>
+                                                <div class="weather-label">Solar Irradiance</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="weather-forecast">
+                                        <h4>7-Day Solar Forecast</h4>
+                                        <div class="forecast-items" id="solarForecast">
+                                            <div class="forecast-item">
+                                                <div class="forecast-day">Mon</div>
+                                                <div class="forecast-icon"><i class="fas fa-sun"></i></div>
+                                                <div class="forecast-hours">5.2h</div>
+                                            </div>
+                                            <div class="forecast-item">
+                                                <div class="forecast-day">Tue</div>
+                                                <div class="forecast-icon"><i class="fas fa-cloud-sun"></i></div>
+                                                <div class="forecast-hours">3.8h</div>
+                                            </div>
+                                            <div class="forecast-item">
+                                                <div class="forecast-day">Wed</div>
+                                                <div class="forecast-icon"><i class="fas fa-sun"></i></div>
+                                                <div class="forecast-hours">6.1h</div>
+                                            </div>
+                                            <div class="forecast-item">
+                                                <div class="forecast-day">Thu</div>
+                                                <div class="forecast-icon"><i class="fas fa-cloud"></i></div>
+                                                <div class="forecast-hours">2.4h</div>
+                                            </div>
+                                            <div class="forecast-item">
+                                                <div class="forecast-day">Fri</div>
+                                                <div class="forecast-icon"><i class="fas fa-sun"></i></div>
+                                                <div class="forecast-hours">5.7h</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI Performance Analytics -->
+                        <div class="insight-card">
+                            <div class="card-header">
+                                <h3>AI Performance Analytics</h3>
+                                <i class="fas fa-tachometer-alt"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="performance-analytics">
+                                    <div class="performance-metrics">
+                                        <div class="perf-metric">
+                                            <div class="perf-value">94.8%</div>
+                                            <div class="perf-label">System Efficiency</div>
+                                            <div class="perf-bar">
+                                                <div class="perf-fill" style="width: 94.8%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="perf-metric">
+                                            <div class="perf-value">12.7 kW</div>
+                                            <div class="perf-label">Peak Output</div>
+                                            <div class="perf-bar">
+                                                <div class="perf-fill" style="width: 85%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="perf-metric">
+                                            <div class="perf-value">0.23s</div>
+                                            <div class="perf-label">AI Analysis Time</div>
+                                            <div class="perf-bar">
+                                                <div class="perf-fill" style="width: 92%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ai-insights">
+                                        <h4>AI Recommendations</h4>
+                                        <div class="ai-recommendations">
+                                            <div class="recommendation">
+                                                <i class="fas fa-lightbulb"></i>
+                                                <span>Optimal tilt angle: 35° for maximum efficiency</span>
+                                            </div>
+                                            <div class="recommendation">
+                                                <i class="fas fa-compass"></i>
+                                                <span>South-facing orientation preferred</span>
+                                            </div>
+                                            <div class="recommendation">
+                                                <i class="fas fa-battery-three-quarters"></i>
+                                                <span>Battery storage recommended for 40% savings boost</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Predictive Intelligence -->
+                        <div class="insight-card">
+                            <div class="card-header">
+                                <h3>Predictive Analytics</h3>
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="prediction-analytics">
+                                    <div class="prediction-summary">
+                                        <div class="prediction-metric">
+                                            <div class="prediction-icon success">
+                                                <i class="fas fa-arrow-up"></i>
+                                            </div>
+                                            <div class="prediction-content">
+                                                <div class="prediction-value">+18.5%</div>
+                                                <div class="prediction-label">Energy Output Increase</div>
+                                                <div class="prediction-timeframe">Next 12 months</div>
+                                            </div>
+                                        </div>
+                                        <div class="prediction-metric">
+                                            <div class="prediction-icon success">
+                                                <i class="fas fa-euro-sign"></i>
+                                            </div>
+                                            <div class="prediction-content">
+                                                <div class="prediction-value">5.8 years</div>
+                                                <div class="prediction-label">ROI Payback Period</div>
+                                                <div class="prediction-timeframe">Current market conditions</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="prediction-factors">
+                                        <h4>Key Prediction Factors</h4>
+                                        <div class="factor-items">
+                                            <div class="factor-item">
+                                                <div class="factor-impact positive">+12%</div>
+                                                <div class="factor-desc">Rising electricity prices</div>
+                                            </div>
+                                            <div class="factor-item">
+                                                <div class="factor-impact positive">+8%</div>
+                                                <div class="factor-desc">Improved panel efficiency</div>
+                                            </div>
+                                            <div class="factor-item">
+                                                <div class="factor-impact negative">-3%</div>
+                                                <div class="factor-desc">Reduced feed-in tariffs</div>
+                                            </div>
+                                            <div class="factor-item">
+                                                <div class="factor-impact positive">+5%</div>
+                                                <div class="factor-desc">Government incentives</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Environmental Impact -->
+                        <div class="insight-card">
+                            <div class="card-header">
+                                <h3>Environmental Impact</h3>
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="environmental-analytics">
+                                    <div class="impact-metrics">
+                                        <div class="impact-metric">
+                                            <div class="impact-icon">
+                                                <i class="fas fa-leaf"></i>
+                                            </div>
+                                            <div class="impact-data">
+                                                <div class="impact-value">127.3 tons</div>
+                                                <div class="impact-label">CO₂ Saved Annually</div>
+                                                <div class="impact-equivalent">= 2,847 trees planted</div>
+                                            </div>
+                                        </div>
+                                        <div class="impact-metric">
+                                            <div class="impact-icon">
+                                                <i class="fas fa-car"></i>
+                                            </div>
+                                            <div class="impact-data">
+                                                <div class="impact-value">54,200 km</div>
+                                                <div class="impact-label">Car Emissions Offset</div>
+                                                <div class="impact-equivalent">= 1.3x around Earth</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sustainability-score">
+                                        <h4>Sustainability Score</h4>
+                                        <div class="score-display">
+                                            <div class="score-circle">
+                                                <div class="score-value">A+</div>
+                                            </div>
+                                            <div class="score-details">
+                                                <div class="score-item">
+                                                    <span class="score-label">Carbon Footprint</span>
+                                                    <span class="score-rating excellent">Excellent</span>
+                                                </div>
+                                                <div class="score-item">
+                                                    <span class="score-label">Energy Independence</span>
+                                                    <span class="score-rating excellent">Excellent</span>
+                                                </div>
+                                                <div class="score-item">
+                                                    <span class="score-label">Grid Impact</span>
+                                                    <span class="score-rating good">Good</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Real-time Monitoring -->
+                        <div class="insight-card large">
+                            <div class="card-header">
+                                <h3>Real-time System Monitoring</h3>
+                                <i class="fas fa-chart-area"></i>
+                                <div class="card-status live">
+                                    <i class="fas fa-circle"></i>
+                                    <span>Live</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="monitoring-dashboard">
+                                    <div class="monitoring-stats">
+                                        <div class="monitor-stat">
+                                            <div class="monitor-value" id="currentPower">8.47 kW</div>
+                                            <div class="monitor-label">Current Output</div>
+                                            <div class="monitor-trend">
+                                                <i class="fas fa-arrow-up"></i>
+                                                <span>Peak at 11:30 AM</span>
+                                            </div>
+                                        </div>
+                                        <div class="monitor-stat">
+                                            <div class="monitor-value" id="todayEnergy">42.3 kWh</div>
+                                            <div class="monitor-label">Today's Generation</div>
+                                            <div class="monitor-trend">
+                                                <i class="fas fa-arrow-up"></i>
+                                                <span>+12% vs yesterday</span>
+                                            </div>
+                                        </div>
+                                        <div class="monitor-stat">
+                                            <div class="monitor-value" id="monthlyEnergy">1,247 kWh</div>
+                                            <div class="monitor-label">Monthly Total</div>
+                                            <div class="monitor-trend">
+                                                <i class="fas fa-arrow-up"></i>
+                                                <span>87% of target</span>
+                                            </div>
+                                        </div>
+                                        <div class="monitor-stat">
+                                            <div class="monitor-value" id="systemHealth">98.2%</div>
+                                            <div class="monitor-label">System Health</div>
+                                            <div class="monitor-trend">
+                                                <i class="fas fa-check-circle"></i>
+                                                <span>All systems optimal</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="performance-chart">
+                                        <h4>24-Hour Performance</h4>
+                                        <div class="chart-container">
+                                            <div class="chart-placeholder">
+                                                <i class="fas fa-chart-line"></i>
+                                                <p>Real-time power generation curve</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">AI-Powered Solar Intelligence</h2>
+                    <p class="section-subtitle">
+                        Revolutionary technology that transforms how we approach solar energy optimization
+                    </p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Smart Algorithm Analysis</h3>
+                            <p>Advanced computational algorithms analyze satellite imagery, weather patterns, and
+                                architectural data to provide optimal solar panel placement recommendations.</p>
+                            <div class="feature-tech">
+                                <span class="tech-tag">Deep Learning</span>
+                                <span class="tech-tag">Computer Vision</span>
+                                <span class="tech-tag">Satellite AI</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-satellite-dish"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Real-Time Satellite Intelligence</h3>
+                            <p>Live satellite data processing with AI-enhanced image recognition to detect roof
+                                conditions, shading patterns, and optimal installation zones.</p>
+                            <div class="feature-tech">
+                                <span class="tech-tag">Satellite API</span>
+                                <span class="tech-tag">Image Processing</span>
+                                <span class="tech-tag">Real-Time</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Predictive Energy Modeling</h3>
+                            <p>Machine learning models predict energy output, weather impact, and long-term
+                                performance with 99.7% accuracy using historical and real-time data.</p>
+                            <div class="feature-tech">
+                                <span class="tech-tag">ML Models</span>
+                                <span class="tech-tag">Predictive AI</span>
+                                <span class="tech-tag">Weather API</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-background">
+                <div class="cta-pattern"></div>
+            </div>
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to Revolutionize Your Solar Strategy?</h2>
+                    <p>Join thousands of users who trust our AI to optimize their solar investments</p>
+                    <button class="btn-primary large" data-action="start-analysis">
+                        <i class="fas fa-rocket"></i>
+                        <span>Start AI Analysis Now</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <i class="fas fa-solar-panel"></i>
+                            <span>SolarVision AI</span>
+                        </div>
+                        <p>Revolutionizing solar energy optimization through advanced AI technology and real-time
+                            satellite intelligence.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#analyzer">AI Analyzer</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#api">API Access</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#docs">Documentation</a></li>
+                        <li><a href="#support">Support</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 SolarVision AI. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#privacy">Privacy</a>
+                        <a href="#terms">Terms</a>
+                        <a href="#cookies">Cookies</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Optimization Results Modal -->
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="optimization-modal">
+            <div class="modal-header">
+                <div class="modal-info">
+                    <h3>AI Optimization Complete</h3>
+                    <p>Advanced smart analysis results</p>
+                </div>
+                <button id="modalClose" class="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="modal-content">
+                <div class="results-summary">
+                    <div class="summary-item">
+                        <div class="summary-icon">
+                            <i class="fas fa-solar-panel"></i>
+                        </div>
+                        <div class="summary-content">
+                            <div class="summary-value" id="modalPanelCount">--</div>
+                            <div class="summary-label">Optimal Panels</div>
+                        </div>
+                    </div>
+
+                    <div class="summary-item">
+                        <div class="summary-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="summary-content">
+                            <div class="summary-value" id="modalSystemSize">--</div>
+                            <div class="summary-label">System Size</div>
+                        </div>
+                    </div>
+
+                    <div class="summary-item">
+                        <div class="summary-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="summary-content">
+                            <div class="summary-value" id="modalAnnualProduction">--</div>
+                            <div class="summary-label">Annual Output</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="placement-visualization">
+                    <div class="viz-header">
+                        <h4>AI-Optimized Placement</h4>
+                        <div class="viz-legend">
+                            <div class="legend-item">
+                                <div class="legend-color optimal"></div>
+                                <span>Optimal</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color good"></div>
+                                <span>Good</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color poor"></div>
+                                <span>Suboptimal</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="roof-visualization">
+                        <p>3D roof visualization with AI-optimized panel placement</p>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button id="downloadReport" class="btn-secondary">
+                        <i class="fas fa-download"></i>
+                        <span>Download Report</span>
+                    </button>
+                    <button id="scheduleConsultation" class="btn-primary">
+                        <i class="fas fa-calendar"></i>
+                        <span>Schedule Consultation</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+    <script src="https://unpkg.com/leaflet-geometryutil@0.10.1/src/leaflet.geometryutil.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
